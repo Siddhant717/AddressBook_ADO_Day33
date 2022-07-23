@@ -11,7 +11,7 @@ namespace AddressBookSystemADO
     {
         public void CreateAddressBookServiceDB()
         {
-            //creating AddressBookService Database
+           //creating AddressBookService Database
             string SQL = "create database Address_Book_Service ";
 
             string connectingstring = @"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True";
@@ -22,7 +22,7 @@ namespace AddressBookSystemADO
             {
                 connection.Open();
                 sqlcommand.ExecuteNonQuery();
-                Console.WriteLine("Database Created Successfully....");
+                Console.WriteLine("Command Completed SuccessFully");
             }
             catch (Exception e)
             {
