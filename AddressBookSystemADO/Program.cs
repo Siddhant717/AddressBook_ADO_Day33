@@ -7,7 +7,7 @@ namespace AddressBookSystemADO
         static void Main(string[] args)
         {
             AddressBook addressbook = new();
-            addressbook.CreateAddressBookServiceDB();
+            addressbook.CreateAddressBookTable();
 
         }
     }
