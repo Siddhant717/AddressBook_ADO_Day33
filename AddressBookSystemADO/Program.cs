@@ -7,7 +7,7 @@ namespace AddressBookSystemADO
         static void Main(string[] args)
         {
             AddressBook addressbook = new();
-            addressbook.UpdateExistingContactInAddressBookTable();
+            addressbook.DeleteContactInAddressBookTable();
 
         }
     }
