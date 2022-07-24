@@ -7,7 +7,8 @@ namespace AddressBookSystemADO
         static void Main(string[] args)
         {
             AddressBook addressbook = new();
-            addressbook.GetAllContactsInAlphbeticalOrderByCity();
+            addressbook.AddTypeColumn();
+            addressbook.UpdateAddressBookByNameandType();
 
 
 

@@ -9,32 +9,50 @@ namespace AddressBookSystemADO
 {
     public class AddressBook
     {
-        // //Sort Persons Name Alphabetically for a given city
-        public void GetAllContactsInAlphbeticalOrderByCity()
+        // Adding Type Column into table
+        public void AddTypeColumn()
         {
-            var SQL = @$"select * from AddressBook where City='Pune'order by FirstName asc";
+            var SQL = @$"alter table  AddressBook add Type varchar(20)";
+
+
             string connectingString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Address_Book_Service;Integrated Security=True"; ;
             SqlConnection connection = new SqlConnection(connectingString);
             SqlCommand cmd = new SqlCommand(SQL, connection);
             connection.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    Console.WriteLine("FirstName {0} - LastName {1} - Address {2} - City {3} -State {4} - ZipCode {5} - PhoneNumber {6} - Email {7} ", reader["FirstName"], reader["LastName"], reader["Address"],
-                        reader["City"], reader["State"], reader["ZipCode"], reader["PhoneNumber"], reader["Email"]);
-                }
-                reader.Close();
-            };
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine(" Type Column Added ");
             Console.ReadKey();
+            connection.Close();
+        }
+        //Identify the address book by Name and Type
+        public void UpdateAddressBookByNameandType()
+        {
+            var sql = $@"update AddressBook set Type ='Family' where FirstName = 'Siddhant'
+                         update AddressBook set Type ='Friend'where FirstName = 'Riya'
+                         update AddressBook set Type ='Friend'  where FirstName = 'Pranav'
+                         update AddressBook set Type = 'Profession' where FirstName = 'Vikas'
+                         update AddressBook set Type = 'Family' where FirstName = 'Shubham'
+                         update AddressBook set Type = 'Profession' where FirstName = 'Rishabh'
+                         update AddressBook set Type = 'Profession' where FirstName = 'Priya'";
+            string connectingString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Address_Book_Service;Integrated Security=True"; ;
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("AddressBook Table is Updated Successfully ");
+            Console.ReadKey();
+            connection.Close();
         }
     }
-    
-        
-        
 
 }
+
+
+
+
+
+
 
 
