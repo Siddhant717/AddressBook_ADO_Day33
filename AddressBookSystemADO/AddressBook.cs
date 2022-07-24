@@ -9,35 +9,31 @@ namespace AddressBookSystemADO
 {
     public class AddressBook
     {
-        //Retrieve the person belonging to City/State
-        public int SizeOfAddressBookByCity()
+        // //Sort Persons Name Alphabetically for a given city
+        public void GetAllContactsInAlphbeticalOrderByCity()
         {
-            var SQL = @$"select Count(City)  from AddressBook; ";
+            var SQL = @$"select * from AddressBook where City='Pune'order by FirstName asc";
             string connectingString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Address_Book_Service;Integrated Security=True"; ;
             SqlConnection connection = new SqlConnection(connectingString);
             SqlCommand cmd = new SqlCommand(SQL, connection);
             connection.Open();
-            object countbycity = cmd.ExecuteScalar();
-            int Count = (int)countbycity;
-            return Count;
-            connection.Close();
+            SqlDataReader reader = cmd.ExecuteReader();
 
-        }
-        //Size of Addressbook by State
-        public int SizeOfAddressBookByState()
-        {
-            var SQL = @$"select Count(State) from AddressBook";
-            string connectingString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Address_Book_Service;Integrated Security=True"; ;
-            SqlConnection connection = new SqlConnection(connectingString);
-            SqlCommand cmd = new SqlCommand(SQL, connection);
-            connection.Open();
-            object countbystate = cmd.ExecuteScalar();
-            int Count = (int)countbystate;
-            return Count;
-            connection.Close();
-
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Console.WriteLine("FirstName {0} - LastName {1} - Address {2} - City {3} -State {4} - ZipCode {5} - PhoneNumber {6} - Email {7} ", reader["FirstName"], reader["LastName"], reader["Address"],
+                        reader["City"], reader["State"], reader["ZipCode"], reader["PhoneNumber"], reader["Email"]);
+                }
+                reader.Close();
+            };
+            Console.ReadKey();
         }
     }
+    
+        
+        
 
 }
 
