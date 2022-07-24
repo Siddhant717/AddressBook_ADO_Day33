@@ -12,16 +12,28 @@ namespace AddressBookSystemADO
         //Deleting existing contact in AddressBook table
         public void DeleteContactInAddressBookTable()
         {
-            var SQL = @$"delete from AddressBook where FirstName = 'Anamika'";
+            var SQL = @$"select * from AddressBook where City='Indore'";
+
+
             string connectingString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Address_Book_Service;Integrated Security=True";
             SqlConnection connection = new SqlConnection(connectingString);
             SqlCommand cmd = new SqlCommand(SQL, connection);
             connection.Open();
-            int reader = cmd.ExecuteNonQuery();
-            Console.WriteLine(reader);
-            Console.WriteLine("Command Completed Successfully");
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Console.WriteLine("FirstName {0} - LastName {1} - Address {2} - City {3} -State {4} - ZipCode {5} - PhoneNumber {6} - Email {7} ", reader["FirstName"], reader["LastName"], reader["Address"],
+                        reader["City"], reader["State"], reader["ZipCode"], reader["PhoneNumber"], reader["Email"]);
+                }
+                reader.Close();
+            };
             Console.ReadKey();
-            connection.Close();
         }
+
     }
+
+
 }
