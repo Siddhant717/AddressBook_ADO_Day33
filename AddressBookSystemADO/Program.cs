@@ -7,8 +7,8 @@ namespace AddressBookSystemADO
         static void Main(string[] args)
         {
             AddressBook addressbook = new();
-            addressbook.AddTypeColumn();
-            addressbook.UpdateAddressBookByNameandType();
+           int result= addressbook.GetNumberOfPersonsCountbyType();
+            Console.WriteLine("Total number of contacts available in Friend Type- "+ result);
 
 
 
